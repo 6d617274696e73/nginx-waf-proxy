@@ -15,7 +15,8 @@ See [Automated Nginx Reverse Proxy for Docker](http://jasonwilder.com/blog/2014/
 To run it:
 
 ```console
-docker run -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock:ro nginxproxy/nginx-proxy
+cd nginx-waf-proxy
+docker build -t nginx-waf-proxy .
 ```
 
 Then start any containers you want proxied with an env var `VIRTUAL_HOST=subdomain.youdomain.com`
@@ -57,7 +58,7 @@ version: '2'
 
 services:
   nginx-proxy:
-    image: nginxproxy/nginx-proxy
+    image: nginx-waf-proxy
     ports:
       - "80:80"
     volumes:
