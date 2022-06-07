@@ -233,9 +233,12 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf \
    && sed -i 's/worker_connections  1024/worker_connections  10240/' /etc/nginx/nginx.conf \
    && mkdir -p '/etc/nginx/dhparam'
 
+# Put load module on top of nginx.conf configuration
 RUN stuff="load_module /etc/nginx/modules/ngx_http_modsecurity_module.so;"; \
    printf '%s\n' 1 i "$stuff" . wq | ed -s /etc/nginx/nginx.conf > /dev/null
 
+# Change server tokens off
+RUN sed -i 's/http {/http {\n\tserver_tokens off;/' /etc/nginx/nginx.conf
 
 # Install Forego + docker-gen
 COPY --from=forego /usr/local/bin/forego /usr/local/bin/forego
