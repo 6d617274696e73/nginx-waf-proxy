@@ -122,7 +122,7 @@ RUN git clone https://github.com/nginx-proxy/forego/ \
    && rm -rf /go/forego
 
 # Build the final image
-FROM nginx:1.21.6
+FROM nginx:1.23.0
 
 ARG MODSEC_VERSION=3.0.6
 ARG YAJL_VERSION=2.1.0
